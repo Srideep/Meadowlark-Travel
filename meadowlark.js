@@ -23,8 +23,14 @@ app.use(handlers.notFound)
 //Custom 500 Page
 app.use(handlers.serverError)
 
-app.listen(port, () => console.log(
-    `Server started listening on port ${port}; ` +
-    'Press Ctrl-C to terminate. '
-))
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(
+            `Server started listening on port ${port}; ` +
+            'Press Ctrl-C to terminate. ')
+    })
+} else {
+    module.exports = app
+}
+
 
